@@ -35,7 +35,7 @@ app.get('/api/users/:username', (request, response) => {
 });
 
 app.post("/api/users",(request,response) =>{
-    
+ 
     if(request.body.username===undefined)
         response.send({error:"Missing username"});
 
@@ -45,9 +45,28 @@ app.post("/api/users",(request,response) =>{
      const password=request.body.password;
     users.push({username:username, password:password,grades:[]});
     response.send({msg:"User created",data:users});
-    
-
-     
+        
 })
+app.put("/api/users/:username",(request,response) =>{
+    for(let i =0;i< users.length;i++){
+        if (users[i].username===request.params.username){
+             users[i].username=request.body.username;
+            break;
+        }
+        
+    }
+    response.send({msg:"User edited",data:users});
+})
+
+// app.delete("/api/users/:username",(request,response) =>{
+//     for(let i =0;i< users.length;i++){
+//         if (users[i].username===request.params.username){
+//              users[i].delete();
+//             break;
+//         }
+        
+//     }
+//     response.send({msg:"User deleted",data:users});
+//}
 const port = 5000;
 app.listen(port, () => console.log(`Listening on port ${port}`));

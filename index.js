@@ -1,13 +1,12 @@
 const express = require('express');
 const app = express();
+const users = require("./routes/api/users")
+
 app.use(express.json())
+
+app.use("/api/users", users);
 // get,post,put,delete
-var users = [
-    {  username: "OmarSherif",  password: "4", grades:[]},
-    {  username: "Alimohamed",  password:"4", grades:[]},
-    {  username: "yahiabadr",  password:"4", grades:[]},
-    {  username: "3ebsooooo",  password:"4", grades:[]}
-];
+
 // users[1].username="king";
 // users.push({username:"asadyalaa", password:"4", grades:[]});
 
@@ -17,58 +16,6 @@ app.get('/', (request, response) => {
     response.send("Welcome");
 });
 
-app.get('/api/users', (request, response) => {
-    
-    response.send({data:users});
-});
 
-app.get('/api/users/:username', (request, response) => {
-    var data = "";
-    for(let i =0;i< users.length;i++){
-        if (users[i].username===request.params.username){
-            data= users[i];
-            break;
-        }
-        
-    }
-    response.send({data:data || 'No student matches the requested id'});
-});
-
-app.post("/api/users",(request,response) =>{
- 
-    if(request.body.username===undefined)
-        response.send({error:"Missing username"});
-
-    if(request.body.password===undefined)
-        response.send({error:"Missing password"});
-     const username=request.body.username;
-     const password=request.body.password;
-    users.push({username:username, password:password,grades:[]});
-    response.send({msg:"User created",data:users});
-        
-})
-app.put("/api/users/:username",(request,response) =>{
-    for(let i =0;i< users.length;i++){
-        if (users[i].username===request.params.username){
-             users[i].username=request.body.username;
-            break;
-        }
-        
-    }
-    response.send({msg:"User edited",data:users});
-})
-
- app.delete("/api/users/:username",(request,response) =>{
-    var newdata=[];
-     for(let i =0;i< users.length;i++){
-         if (users[i].username!==request.params.username){
-              newdata.push(users[i])
-             
-         }
-        
-     }
-     users=newdata;
-     response.send({msg:"User deleted",data:newdata});
-})
 const port = 5000;
 app.listen(port, () => console.log(`Listening on port ${port}`));

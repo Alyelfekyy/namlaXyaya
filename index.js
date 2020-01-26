@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 app.use(express.json())
 // get,post,put,delete
-const users = [
+var users = [
     {  username: "OmarSherif",  password: "4", grades:[]},
     {  username: "Alimohamed",  password:"4", grades:[]},
     {  username: "yahiabadr",  password:"4", grades:[]},
@@ -58,15 +58,17 @@ app.put("/api/users/:username",(request,response) =>{
     response.send({msg:"User edited",data:users});
 })
 
-// app.delete("/api/users/:username",(request,response) =>{
-//     for(let i =0;i< users.length;i++){
-//         if (users[i].username===request.params.username){
-//              users[i].delete();
-//             break;
-//         }
+ app.delete("/api/users/:username",(request,response) =>{
+    var newdata=[];
+     for(let i =0;i< users.length;i++){
+         if (users[i].username!==request.params.username){
+              newdata.push(users[i])
+             
+         }
         
-//     }
-//     response.send({msg:"User deleted",data:users});
-//}
+     }
+     users=newdata;
+     response.send({msg:"User deleted",data:newdata});
+})
 const port = 5000;
 app.listen(port, () => console.log(`Listening on port ${port}`));

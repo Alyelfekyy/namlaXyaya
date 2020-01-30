@@ -67,7 +67,7 @@ router.put("/grades/:username",(request,response) =>{
     const creditHours=request.body.creditHours
     for(let i =0;i< users.length;i++){
         if (users[i].username===request.params.username){
-            users[i].grades.push({"courseName":coursename, "grade":thegrade, "creditHours":credithours})
+            users[i].grades.push({"courseName":courseName, "grade":grade, "creditHours":creditHours})
             break;
            
         }

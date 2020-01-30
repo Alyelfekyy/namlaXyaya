@@ -61,18 +61,20 @@ router.put("/:username",(request,response) =>{
      response.send({msg:"User deleted",data:newdata});
 })
 
-router.put("/:username/grades",(request,response) =>{
-    const x=request.body;
+router.put("/grades/:username",(request,response) =>{
+    const coursename=request.body.courseName;
+    const thegrade=request.body.grade;
+    const credithours=request.body.creditHours
     for(let i =0;i< users.length;i++){
         if (users[i].username===request.params.username){
-            users[i].grades.push({"courseName":x.courseName, "grade":x.grade, "creditHours":x.creditHours})
+            users[i].grades.push({"courseName":coursename, "grade":thegrade, "creditHours":credithours})
             break;
            
         }
         
     }
-    console.log(users)
-    response.send({msg:"User updated",data:users});
+   
+    response.send({msg:"Course Added",data:users});
 })
 
 module.exports=router;

@@ -61,7 +61,7 @@ router.put("/:username",(request,response) =>{
      response.send({msg:"User deleted",data:newdata});
 })
 
-router.put("/grades/:username",(request,response) =>{
+router.put("/addGrades/:username",(request,response) =>{
     const courseName=request.body.courseName;
     const grade=request.body.grade;
     const creditHours=request.body.creditHours

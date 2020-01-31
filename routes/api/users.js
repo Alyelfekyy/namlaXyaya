@@ -61,21 +61,21 @@ router.put("/:username",(request,response) =>{
      response.send({msg:"User deleted",data:newdata});
 })
 
-router.put("/addTempgrade/:username",(request,response) =>{
-    var tempdata=[];
+router.put("/addTempGrade/:username",(request,response) =>{
+    var tempData=[];
     const courseName=request.body.courseName;
     const grade=request.body.grade;
     const creditHours=request.body.creditHours
     for(let i =0;i< users.length;i++){
         if (users[i].username===request.params.username){
-            tempdata.push({"courseName":courseName, "grade":grade, "creditHours":creditHours})
+            tempData.push({courseName:courseName, grade:grade, creditHours:creditHours})
             break;
            
         }
         
     }
   
-    response.send({msg:"Course Added",data:tempdata});
+    response.send({msg:"temp Grade Added",data:tempdata});
 })  
 
 module.exports=router;

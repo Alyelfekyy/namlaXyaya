@@ -61,23 +61,7 @@ router.put("/:username",(request,response) =>{
      response.send({msg:"User deleted",data:newdata});
 })
 
-router.put("/grades/:username",(request,response) =>{
-    const courseName=request.body.courseName;
-    const grade=request.body.grade;
-    const creditHours=request.body.creditHours
-    for(let i =0;i< users.length;i++){
-        if (users[i].username===request.params.username){
-            users[i].grades.push({"courseName":courseName, "grade":grade, "creditHours":creditHours})
-            break;
-           
-        }
-        
-    }
-   
-    response.send({msg:"Course Added",data:users});
-})
-
-router.put("/tempgrades/:username",(request,response) =>{
+router.put("/addTempgrade/:username",(request,response) =>{
     var tempdata=[];
     const courseName=request.body.courseName;
     const grade=request.body.grade;
@@ -90,7 +74,7 @@ router.put("/tempgrades/:username",(request,response) =>{
         }
         
     }
-   console.log(tempdata);
+  
     response.send({msg:"Course Added",data:tempdata});
 })  
 

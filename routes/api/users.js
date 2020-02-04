@@ -61,4 +61,20 @@ router.put("/:username",(request,response) =>{
      response.send({msg:"User deleted",data:newdata});
 })
 
+router.put("/addGrade/:username",(request,response) =>{
+    const courseName=request.body.courseName;
+    const grade=request.body.grade;
+    const creditHours=request.body.creditHours
+    for(let i =0;i< users.length;i++){
+        if (users[i].username===request.params.username){
+            users[i].grades.push({courseName:courseName, grade:grade, creditHours:creditHours})
+            break;
+           
+        }
+        
+    }
+   
+    response.send({msg:"Course Added",data:users});
+})
+
 module.exports=router;

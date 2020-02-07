@@ -68,9 +68,7 @@ router.put("/addTempGrade/:username",(request,response) =>{
     const creditHours=request.body.creditHours
     for(let i =0;i< users.length;i++){
         if (users[i].username===request.params.username){
-           for(let j=0;j<users[i].grades.length;j++){
-               tempData.push(users[i].grades[j])
-           }
+               tempData=(users[i].grades[j]);
             tempData.push({courseName:courseName, grade:grade, creditHours:creditHours});
             break;
            

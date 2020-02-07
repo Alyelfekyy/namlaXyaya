@@ -1,7 +1,7 @@
 const express =require("express");
 const router =express.Router()
 var users = [
-    {  username: "OmarSherif",  password: "4", grades:[]},
+    {  username: "OmarSherif",  password: "4", grades:[{courseName:"Cs",grades:"C",creditHourse:4}]},
     {  username: "Alimohamed",  password:"4", grades:[]},
     {  username: "yahiabadr",  password:"4", grades:[]},
     {  username: "3ebsooooo",  password:"4", grades:[]}
@@ -68,7 +68,9 @@ router.put("/addTempGrade/:username",(request,response) =>{
     const creditHours=request.body.creditHours
     for(let i =0;i< users.length;i++){
         if (users[i].username===request.params.username){
-            tempData.push(users[i].grades);
+           for(let j=0;j<users[i].grades.length;j++){
+               tempData.push(users[i].grades[j])
+           }
             tempData.push({courseName:courseName, grade:grade, creditHours:creditHours});
             break;
            
@@ -76,7 +78,7 @@ router.put("/addTempGrade/:username",(request,response) =>{
         
     }
   
-    response.send({msg:"temp Grade Added",data:tempdata});
+    response.send({msg:"temp Grade Added",data:tempData});
 })  
 
 module.exports=router;

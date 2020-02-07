@@ -70,13 +70,9 @@ router.put("/addTempGrade/:username",(request,response) =>{
         if (users[i].username===request.params.username){
                tempData=(users[i].grades[j]);
             tempData.push({courseName:courseName, grade:grade, creditHours:creditHours});
-            break;
-           
-        }
-        
+            break; 
+        }    
     }
-  
     response.send({msg:"temp Grade Added",data:tempData});
 })  
-
 module.exports=router;

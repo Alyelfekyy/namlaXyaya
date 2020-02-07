@@ -1,7 +1,7 @@
 const express =require("express");
 const router =express.Router()
 var users = [
-    {  username: "OmarSherif",  password: "4", grades:[]},
+    {  username: "OmarSherif",  password: "4", grades:[{courseName:"ALi",grade:"A",creditHours:4}]},
     {  username: "Alimohamed",  password:"4", grades:[]},
     {  username: "yahiabadr",  password:"4", grades:[]},
     {  username: "3ebsooooo",  password:"4", grades:[]}
@@ -77,4 +77,48 @@ router.put("/addGrade/:username",(request,response) =>{
     response.send({msg:"Course Added",data:users});
 })
 
+router.get('/calculateGpa/:username', (request, response) => {
+    const userName=request.params.username;
+    var x=0;
+    var y=0;
+    number=0;
+    gpa=0.0;
+    for(let i=0;i< users.length;i++){
+        if(users[i].username===userName)
+        for(let j=0;j<users[i].grades.length;j++){
+            if(users[i].grades[j].grade== "A+")
+			number = 0.7;
+		else if(users[i].grades[j].grade== "A")
+			number = 1.0;
+		else if(users[i].grades[j].grade == "A-")
+			number = 1.3;
+		else if(users[i].grades[j].grade == "B+")
+			number = 1.7;
+		else if(users[i].grades[j].grade == "B")
+			number = 2.0;
+		else if(users[i].grades[j].grade == "B-")
+			number = 2.3;
+		else if(users[i].grades[j].grade == "C+")
+			number = 2.7;
+		else if(users[i].grades[j].grade == "C")
+			number = 3.0;
+		else if(users[i].grades[j].grade == "C-")
+			number = 3.3;
+		else if(users[i].grades[j].grade == "D+")
+			number = 3.7;
+		else if(users[i].grades[j].grade == "D")
+			number = 4.0;
+		else if(users[i].grades[j].grade == "F"){
+            number = 0;
+        }
+
+            x=x+number;
+            y=y+users[i].grades[j].creditHours;
+            
+        }
+        gpa=y/x;
+
+    }
+    response.send({msg:"GPA Calculated",data:gpa});
+})
 module.exports=router;

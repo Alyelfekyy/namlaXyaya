@@ -77,4 +77,18 @@ router.put("/addGrade/:username",(request,response) =>{
     response.send({msg:"Course Added",data:users});
 })
 
+router.put("/addTempGrade/:username",(request,response) =>{
+    var tempData=[];
+    const courseName=request.body.courseName;
+    const grade=request.body.grade;
+    const creditHours=request.body.creditHours
+    for(let i =0;i< users.length;i++){
+        if (users[i].username===request.params.username){
+               tempData=(users[i].grades[j]);
+            tempData.push({courseName:courseName, grade:grade, creditHours:creditHours});
+            break; 
+        }    
+    }
+    response.send({msg:"temp Grade Added",data:tempData});
+})  
 module.exports=router;
